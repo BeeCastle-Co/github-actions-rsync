@@ -1,0 +1,20 @@
+name: 'github-actions-rsync'
+description: 'Github action for rsync'
+inputs:
+  rsync-options:
+    description: 'Flags for rsync'
+    required: false
+    default: ''
+  rsync-target:
+    description: 'Destination filepath'
+    required: true
+  rsync-source:
+    description: 'Source filepath'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.rsync-options }}
+      ${{ inputs.rsync-source }}
+      ${{ inputs.rsync-target }}
