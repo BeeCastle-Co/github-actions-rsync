@@ -15,6 +15,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.rsync-options }}
       ${{ inputs.rsync-source }}
       ${{ inputs.rsync-target }}
