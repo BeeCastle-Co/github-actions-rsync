@@ -16,7 +16,7 @@ Rsync files from a GitHub repo to a destination server over SSH
 |--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `RSYNC_OPTIONS`    | Rsync-specific options when running the command. Exclusions, deletions, etc                                                                          |
 | `RSYNC_TARGET`     | Where to deploy the files on the server                                                                                                              |
-| `RSYNC_SOURCE`     | What files to deploy from the repo (starts at root) **NOTE**: a trailing `/` deploys the _contents_ of the directory instead of the entire directory |
+| `RSYNC_SOURCE`     | The path to the files to copy, relative to [`$GITHUB_WORKSPACE`](https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables). If that variable is not set, you'll need to supply an absolute path here. **NOTE**: a trailing `/` deploys the _contents_ of the directory instead of the entire directory. |
 
 ## Example usage
 
@@ -35,11 +35,11 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Deploy to sandbox via rsync
-        uses: trendyminds/github-actions-rsync@master
+        uses: carlegbert/github-actions-rsync@master
         with:
           RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
           RSYNC_TARGET: /path/to/target/folder/on/server
-          RSYNC_SOURCE: /src/public/
+          RSYNC_SOURCE: src/public/
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
           SSH_USERNAME: ${{secrets.SSH_USERNAME}}
