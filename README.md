@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Deploy to sandbox via rsync
-        uses: carlegbert/github-actions-rsync@master
+        uses: BeeCastle-Co/github-actions-rsync@master
         with:
           RSYNC_OPTIONS: -avzr --delete --exclude node_modules --exclude '.git*'
           RSYNC_TARGET: /path/to/target/folder/on/server

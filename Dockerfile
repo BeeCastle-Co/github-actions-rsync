@@ -1,10 +1,6 @@
-FROM alpine:latest
+FROM beecastle/rsync-ssh:latest
 
-# Update
-RUN apk update
-
-# Install packages
-RUN apk add rsync openssh-client
+MAINTAINER Hamish Rickerby <hamish@beecastle.com>
 
 # Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh
